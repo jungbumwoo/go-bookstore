@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
@@ -11,18 +12,22 @@ var (
 )
 
 func Connect() {
-	DBMS := "mysql"
-	USER := "go_test"
-	PASS := "password"
-	PROTOCOL := "tcp(127.0.0.2)"
-	DBNAME := "go_database"
+	USER := "matthew"
+	PASS := "password1234"
+	HOST := "mysql-db"
+	PORT := "3306"
+	NAME := "bookstore-db"
 
-	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?charset=utf8&parseTime=true&loc=Asia%2FTokyo"
+	CONNECT := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=True", USER, PASS, HOST, PORT, NAME)
+	log.Println(CONNECT)
+	d, err := gorm.Open("mysql", CONNECT)
 
-	d, err := gorm.Open(DBMS, CONNECT)
 	if err != nil {
+		log.Println("sibal what is this 9")
 		log.Println(err)
 		panic(err)
+	} else {
+		fmt.Sprintf("DB Connected.")
 	}
 	db = d
 }

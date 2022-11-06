@@ -1,12 +1,13 @@
 version: '3.8'
 services:
-  go:
+  app:
+    image: go-bookstore
     build:
       context: .
       dockerfile: Dockerfile
     restart: always
-    networks:
-      - mattnet
+#    networks:
+#      - matt-net
     ports:
       - 8080:8080
     depends_on:
@@ -14,21 +15,21 @@ services:
 
   mysql-db:
     platform: linux/amd64
-    image: mysql:8.0.22
-    container_name: go-bookstoreDB
-    networks:
-      - mattnet
+    image: mysql:5.7
+#    networks:
+#      - matt-net
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: go_database
-      MYSQL_USER: go_test
-      MYSQL_PASSWORD: password
-      TZ: 'Asia/Tokyo'
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      - MYSQL_ROOT_HOST=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=matthew
+      - MYSQL_PASSWORD=password1234
+      - MYSQL_DATABASE=bookstore-db
+    command:
+      - --default-authentication-plugin=mysql_native_password
     ports:
       - 3306:3306
-
-networks:
-  mattnet:
-    driver: bridge
+#
+#networks:
+#  matt-net:
+#    driver: bridge
 

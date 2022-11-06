@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/jungbumwoo/go-bookstore/pkg/config"
+	"log"
 )
 
 var db *gorm.DB
@@ -15,6 +16,7 @@ type Book struct {
 }
 
 func init() {
+	log.Println("init at book.go")
 	config.Connect()
 	db = config.GetDB()
 	db.AutoMigrate(&Book{})
