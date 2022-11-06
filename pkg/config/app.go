@@ -13,7 +13,7 @@ func Connect() {
 	DBMS := "mysql"
 	USER := "go_test"
 	PASS := "password"
-	PROTOCOL := "tcp(go-boostoreDB)"
+	PROTOCOL := "tcp(127.0.0.1)"
 	DBNAME := "go_database"
 
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?charset=utf8&parseTime=true&loc=Asia%2FTokyo"

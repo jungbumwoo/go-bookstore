@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -12,6 +13,13 @@ import (
 )
 
 var NewBook models.Book
+
+func GetPing(w http.ResponseWriter, r *http.Request) {
+	res := "pong"
+	log.Println("ping..")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(res))
+}
 
 func GetBook(w http.ResponseWriter, r *http.Request) {
 	newBooks := models.GetAllBooks()
