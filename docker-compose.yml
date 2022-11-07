@@ -4,23 +4,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: /bin/sh -c "go run main.go"
     restart: always
-    stdin_open: true
-    tty: true
-    volumes:
-      - .:/app
     ports:
       - 8080:8080
     depends_on:
-      - "mysql-db"
+      - mysql-db
 
   mysql-db:
     platform: linux/amd64
     image: mysql:8.0.22
-    container_name: go-boostoreDB
-    cap_add:
-      - SYS_NICE
+    container_name: go-bookstoreDB
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: go_database

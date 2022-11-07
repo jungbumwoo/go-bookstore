@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/jungbumwoo/go-bookstore/pkg/config"
+	"log"
 )
 
 var db *gorm.DB
@@ -16,8 +17,11 @@ type Book struct {
 
 func init() {
 	config.Connect()
+	log.Println("db Connected at init")
 	db = config.GetDB()
+	log.Println("GetDB success")
 	db.AutoMigrate(&Book{})
+	log.Println("Migrated success")
 }
 
 func (b *Book) CreateBook() *Book {
